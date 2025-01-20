@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static 'css/homepage.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div id="header">
+        <span class="logo">
+            <a href="http://127.0.0.1:8000/">
+                Houses
+            </a>
+        </span>
+        <span>
+            {% if request.user.is_authenticated %}
+                <form action="{% url 'houses:logout' %}" method="post">
+                    {% csrf_token %}
+                    <button class="logout_button">Выйти</button>
+                </form>
+            {% else %}
+                <form action="{% url 'houses:login' %}" method="post">
+                    {% csrf_token %}
+                    <button class="auth_button">Авторизоваться</button>
+                </form>
+
+                <form action="{% url 'houses:register' %}" method="post">
+                    <button class="register_button">Зарегистрироваться</button>
+                </form>
+            {% endif %}
+        </span>
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
