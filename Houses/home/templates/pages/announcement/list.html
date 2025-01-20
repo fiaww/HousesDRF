@@ -1,0 +1,47 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Houses{% endblock %}
+
+{% block content %}
+
+
+    <h1>
+        Поиск недвижимости
+        {% if request.user.is_authenticated %}
+        <form class="new_announcement" action="http://127.0.0.1:8000/new_announcement/">
+            <button type="big">Выложить объявление</button>
+        </form>
+        {% else %}
+        <form class="make_new_announcement" action="http://127.0.0.1:8000/login/">
+            <button type="make_new_announcement" align="center">Авторизуйтесь, чтобы выложить объявление</button>
+        </form>
+        {% endif %}
+    </h1>
+
+
+    {% for property in property_list %}
+    <body>
+    <div class="card" style="top: 8px">
+    <h2>
+
+            <img src="{{property_images.url}}"  class="card_image" align="left" alt=""/>
+            <a class="title">{{ property.title }}</a>
+            <a class="price">{{ property.price }} ₽</a>
+    </h2>
+        <h4>
+            <p class="body">{{ property.description|truncatewords:50|linebreaks }}</p>
+        </h4>
+            <h3 class="card_bottom">
+                  Продавец: {{ property.owner }}
+                <p class="card_bottom">
+                    Опубликовано: {{ property.created_at }}
+                </p>
+                <br>
+            </h3>
+        </a>
+    </div>
+    </body>
+    {% endfor %}
+    <br>
+
+{% endblock content %}
