@@ -1,0 +1,13 @@
+{% extends "pages/base.html" %}
+
+{% block title %}Создание объявления{% endblock %}
+
+{% block content %}
+ <h1>Создание объявления</h1>
+ <p>Создайте объявление, заполняя поля указанные ниже:</p>
+     <form method="post" >
+        {{ property_form.as_p }}
+         {% csrf_token %}
+        <button type="submit">Submit</button>
+     </form>
+{% endblock %}

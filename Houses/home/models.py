@@ -5,9 +5,10 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
+    username = models.CharField(max_length=100, unique=True)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{10}$',
                                  message="Введите ваш номер телефона после +7")
-    phone_number = models.CharField(validators=[phone_regex], max_length=10, blank=True)
+    phone_number = models.CharField(validators=[phone_regex], max_length=10, blank=True, unique=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
 
     def __str__(self):

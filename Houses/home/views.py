@@ -1,13 +1,16 @@
-from django.contrib.auth import get_user_model
-from django.shortcuts import render
-from rest_framework import viewsets, permissions, generics, mixins
+from django.contrib.auth import get_user_model, login
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from rest_framework import viewsets, permissions, generics, mixins, status
 from rest_framework.generics import get_object_or_404
+from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from .permissions import IsOwnerOrReadOnly
 from .models import Property, PropertyImage
 from .serializer import PropertySerializer, PropertyImageSerializer, UserRegistrationSerializer
 from .models import CustomUser
 from .serializer import UserSerializer
+from .forms import PropertyForm
 
 
 class PropertyViewSet(viewsets.ModelViewSet):
@@ -45,6 +48,32 @@ User = get_user_model()
 
 
 class UserRegistrationView(generics.CreateAPIView):
-    queryset = User.objects.all()
+    def post(self, request):
+        # serializer_class = UserRegistrationSerializer
+        serializer = UserRegistrationSerializer(data=request.data)
+
+        if serializer.is_valid():
+            user = serializer.save()
+            login(request, user)
+            next_url = request.GET.get('next', 'houses:homepage')
+            return redirect(next_url)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # queryset = User.objects.all()
     serializer_class = UserRegistrationSerializer
     permission_classes = [permissions.AllowAny]
+
+
+@login_required
+def create_announcement(request):
+    property_owner = request.user
+    if request.method == 'POST':
+        property_form = PropertyForm(request.POST)
+        if property_form.is_valid():
+            new_property = property_form.save(commit=False)
+            new_property.owner = request.user
+            new_property.save()
+            return redirect('houses:homepage')
+    else:
+        property_form = PropertyForm()
+    return render(request, 'pages/announcement/create.html', {'property_form': property_form})
