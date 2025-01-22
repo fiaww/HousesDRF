@@ -12,7 +12,9 @@ router.register(r'home', PropertyViewSet, basename='home')
 
 urlpatterns = [
     path('', views.PropertyViewSet.homepage, name='homepage'),
-    path('<int:id>/', views.PropertyViewSet.home_detail, name='detail'),
+    path('property/<int:pk>/', views.PropertyViewSet.property_detail, name='detail'),
+    path('property/<int:pk>/edit/', views.PropertyViewSet.property_edit, name='edit'),
+    path('property/<int:pk>/delete/', views.PropertyViewSet.property_delete, name='delete'),
     path('register/', views.UserRegistrationView.as_view(), name='register'),
     path('login/', LoginView.as_view(template_name='pages/users/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='pages/users/logout.html'), name='logout'),

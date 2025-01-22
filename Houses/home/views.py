@@ -23,19 +23,45 @@ class PropertyViewSet(viewsets.ModelViewSet):
 
     def homepage(request):
         property_list = Property.objects.all()
-        # context = {'houses_list': houses_list}
         return render(request,
                       'pages/announcement/list.html',
                       {'property_list': property_list})
 
-    def home_detail(request, id):
-        property_detail = get_object_or_404(Property,
-                                            id=id,
-                                            status=Property.is_active)
-        # context = {'home': home}
+    def property_detail(request, pk):
+        property_detail = get_object_or_404(Property, pk=pk)
         return render(request,
                       'pages/announcement/detail.html',
                       {'property_detail': property_detail})
+
+    @login_required
+    def property_edit(request, pk):
+        property_edit = get_object_or_404(Property, pk=pk)
+
+        if request.user != property_edit.owner:
+            return redirect('houses:detail', pk=property_edit.pk)
+
+        if request.method == 'POST':
+            form = PropertyForm(request.POST, instance=property_edit)
+            if form.is_valid():
+                form.save()
+                return redirect('houses:detail', pk=property_edit.pk)
+        else:
+            form = PropertyForm(instance=property_edit)
+
+        return render(request, 'pages/announcement/edit.html', {'form': form, 'property_edit': property_edit})
+
+    @login_required
+    def property_delete(request, pk):
+        property_delete = get_object_or_404(Property, pk=pk)
+
+        if request.user != property_delete.owner:
+            return redirect('houses:detail', pk=property_delete.pk)
+
+        if request.method == 'POST':
+            property_delete.delete()
+            return redirect('houses:homepage')
+
+        return render(request, 'pages/announcement/delete.html', {'property_delete': property_delete})
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -66,7 +92,6 @@ class UserRegistrationView(generics.CreateAPIView):
 
 @login_required
 def create_announcement(request):
-    property_owner = request.user
     if request.method == 'POST':
         property_form = PropertyForm(request.POST)
         if property_form.is_valid():

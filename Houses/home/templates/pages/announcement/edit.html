@@ -1,0 +1,19 @@
+{% extends "pages/base.html" %}
+
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование объявления</title>
+</head>
+<body>
+    <h1>Редактирование объявление: {{ property_edit.title }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить изменения</button>
+    </form>
+    <a href="{% url 'houses:detail' property_edit.pk %}">Отмена</a>
+</body>
+{% endblock %}

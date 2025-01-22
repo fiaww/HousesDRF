@@ -1,0 +1,33 @@
+{% extends "pages/base.html" %}
+
+{% block title %}{{ property_detail.title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ property_detail.title }}</h1>
+    <a>
+        {{ property_detail.price }} RUB
+        <div class="list-image">
+            <img class="list-image" src="{{property.image.url}}" alt="" >
+        </div>
+    </a>
+    {{ property_detail.body|linebreaks }}
+    <p>
+        Продавец: {{ property_detail.owner }}
+    </p>
+    <p>
+        Номер телефона: +7{{ property_detail.owner.phone_number }}
+    </p>
+    <p class="date">
+        Опубликовано: {{ property_detail.created_at }}
+    </p>
+ {% if request.user == property_detail.owner %}
+        <form action="{% url 'houses:edit' property_detail.pk %}" method="get" style="display: inline;">
+
+            <button type="submit">Редактировать</button>
+        </form>
+        <form action="{% url 'houses:delete' property_detail.pk %}" method="get" style="display: inline;">
+
+            <button type="submit">Удалить</button>
+        </form>
+    {% endif %}
+{% endblock %}

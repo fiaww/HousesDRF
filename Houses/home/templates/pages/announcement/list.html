@@ -23,19 +23,18 @@
     <body>
     <div class="card" style="top: 8px">
     <h2>
-
+            <a href="{% url 'houses:detail' property.pk %}"></a>
             <img src="{{property_images.url}}"  class="card_image" align="left" alt=""/>
-            <a class="title">{{ property.title }}</a>
+            <a href="{% url 'houses:detail' property.pk %}" class="title">{{ property.title }}</a>
             <a class="price">{{ property.price }} ₽</a>
     </h2>
         <h4>
             <p class="body">{{ property.description|truncatewords:50|linebreaks }}</p>
         </h4>
             <h3 class="card_bottom">
-                  Продавец: {{ property.owner }}
-                <p class="card_bottom">
-                    Опубликовано: {{ property.created_at }}
-                </p>
+                <p class="card_bottom">Город: {{ property.city }}</p>
+                <p class="card_bottom">Продавец: {{ property.owner }}</p>
+                <p class="card_bottom">Опубликовано: {{ property.created_at }}</p>
                 <br>
             </h3>
         </a>
