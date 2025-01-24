@@ -12,6 +12,10 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
+        <div>
+            <label for="id_images">Изображения:</label>
+            <input type="file" name="images" id="id_images" multiple>
+        </div>
         <button type="submit">Сохранить изменения</button>
     </form>
     <a href="{% url 'houses:detail' property_edit.pk %}">Отмена</a>

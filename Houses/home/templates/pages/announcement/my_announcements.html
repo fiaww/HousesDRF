@@ -2,10 +2,10 @@
 
 {% block title %}Houses{% endblock %}
 
+
 {% block content %}
 
-
-    <h1>Поиск недвижимости</h1>
+    <h1>Мои объявления</h1>
         <div class="filters">
         <form method="get" style="display: flex; align-items: center; gap: 16px;">
             <div class="checkbox-list">
@@ -47,8 +47,8 @@
         <form class="new_announcement" action="{% url 'houses:create_announcement' %}">
             <button type="big">Выложить объявление</button>
         </form>
-        <form class="my_announcements" action="{% url 'houses:my_announcements' %}">
-            <button type="big1">Мои объявления</button>
+        <form class="my_announcements" action="{% url 'houses:homepage' %}">
+            <button type="big1">Все объявления</button>
         </form>
         {% else %}
         <form class="make_new_announcement" action="{% url 'houses:login' %}">
@@ -57,15 +57,12 @@
         {% endif %}
 
 
-
     {% for property in property_list %}
     <body>
     <div class="card" style="top: 8px">
     <h2>
             <a href="{% url 'houses:detail' property.pk %}"></a>
-            {% for image in property.images.all %}
             <img src="{{property_images.url}}"  class="card_image" align="left" alt=""/>
-            {% endfor %}
             <a href="{% url 'houses:detail' property.pk %}" class="title">{{ property.title }}</a>
             <a class="price">{{ property.price }} ₽</a>
     </h2>
@@ -80,8 +77,13 @@
             </h3>
         </a>
     </div>
-    </body>
+        {% empty %}
+        <li>У вас пока нет объявлений.</li>
     {% endfor %}
+
+    </body>
+
     <br>
 
 {% endblock content %}
+

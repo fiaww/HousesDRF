@@ -145,12 +145,18 @@ ol {
 
 .new_announcement {
     position: absolute;
-    margin: -61px 0px 0px 520px;
+    margin: -92px 0px 0px 520px;
 }
 
 .make_new_announcement {
     position: absolute;
-    margin: -30px 0px 0px 440px;
+    margin: -92px 0px 0px 440px;
+}
+
+.my_announcements {
+    width: 1600px;
+    position: absolute;
+    margin: -18px 0px 0px 570px;
 }
 
 #content .price {
@@ -217,6 +223,7 @@ ol {
 #content {
     padding:10px 700px;
     padding-left: 70px;
+    width: 1150px;
 }
 
 /* forms */
@@ -271,6 +278,18 @@ button[type=big], a.button {
     margin: 100px 0px 0px 770px;
     cursor:pointer;
     border-radius: 32px;
+}
+
+button[type=big1], a.button {
+    font-weight:bold;
+    background:#8B0000;
+    color:#fff;
+    padding:12px 50px;
+    font-size:30px;
+    margin: 100px 0px 0px 720px;
+    cursor:pointer;
+    border-radius: 32px;
+    width: 452px;
 }
 
 button[type=make_new_announcement], b.button {
@@ -432,6 +451,7 @@ img.user-detail {
 .image-container { margin-top:40px; }
 
 /* actions */
+
 .action {
     clear:both;
     overflow:auto;
@@ -481,3 +501,40 @@ img.user-detail {
     float:bottom;
 
 }
+
+/* filters */
+
+ .filters {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            display: flex;  /* Делаем контейнер гибким */
+            align-items: center;  /* Выравниваем элементы по центру */
+            gap: 10px;  /* Расстояние между элементами */
+        }
+        .filters label {
+            margin-right: 5px;
+        }
+        .filters input, .filters select {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .filters button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .filters button:hover {
+            background-color: #0056b3;
+        }
+        .checkbox-list {
+            display: flex;  /* Чекбоксы в ряд */
+            align-items: center;
+            gap: 10px;
+        }
