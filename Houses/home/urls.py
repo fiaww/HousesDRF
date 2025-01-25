@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import include, path, re_path
 from rest_framework import routers
 from .views import PropertyViewSet
@@ -21,3 +23,6 @@ urlpatterns = [
     path('create_announcement/', views.create_announcement, name='create_announcement'),
     path('my_announcements/', views.PropertyViewSet.my_announcements, name='my_announcements'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

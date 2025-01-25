@@ -154,7 +154,7 @@ ol {
 }
 
 .my_announcements {
-    width: 1600px;
+    width: 1200px;
     position: absolute;
     margin: -18px 0px 0px 570px;
 }
@@ -471,7 +471,7 @@ img.user-detail {
   outline-color: #D6D6D6;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  border-radius: 10px;
+  border-radius: 28px;
   position: relative;
   min-height: 210px;
   margin-top: 15px;
@@ -484,6 +484,8 @@ img.user-detail {
 }
 .card_image {
     display: block;
+    border: none;
+    border-radius: 34px;
     height: 180px;
     width: 255px;
     padding-right:7px;
