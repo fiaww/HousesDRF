@@ -44,12 +44,13 @@
         </form>
     </div>
         {% if request.user.is_authenticated %}
-        <form class="new_announcement" action="{% url 'houses:create_announcement' %}">
-            <button type="big">Выложить объявление</button>
-        </form>
         <form class="my_announcements" action="{% url 'houses:homepage' %}">
             <button type="big1">Все объявления</button>
         </form>
+        <form class="new_announcement" action="{% url 'houses:create_announcement' %}">
+            <button type="big">Выложить объявление</button>
+        </form>
+
         {% else %}
         <form class="make_new_announcement" action="{% url 'houses:login' %}">
             <button type="make_new_announcement" align="center">Авторизуйтесь, чтобы выложить объявление</button>

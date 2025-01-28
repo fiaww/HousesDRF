@@ -44,11 +44,11 @@
         </form>
     </div>
         {% if request.user.is_authenticated %}
-        <form class="new_announcement" action="{% url 'houses:create_announcement' %}">
-            <button type="big">Выложить объявление</button>
-        </form>
         <form class="my_announcements" action="{% url 'houses:my_announcements' %}">
             <button type="big1">Мои объявления</button>
+        </form>
+        <form class="new_announcement" action="{% url 'houses:create_announcement' %}">
+            <button type="big">Выложить объявление</button>
         </form>
         {% else %}
         <form class="make_new_announcement" action="{% url 'houses:login' %}">
@@ -71,10 +71,11 @@
         <h4>
             <p class="body">{{ property.description|truncatewords:50|linebreaks }}</p>
         </h4>
+
             <h3 class="card_bottom">
-                <p class="card_bottom">Город: {{ property.city }}</p>
-                <p class="card_bottom">Продавец: {{ property.owner }}</p>
-                <p class="card_bottom">Опубликовано: {{ property.created_at }}</p>
+                <p >Город: {{ property.city }}</p>
+                <p >Продавец: {{ property.owner }}</p>
+                <p >Опубликовано: {{ property.created_at }}</p>
                 <br>
             </h3>
         </a>

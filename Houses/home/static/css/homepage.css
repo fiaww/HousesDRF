@@ -154,7 +154,6 @@ ol {
 }
 
 .my_announcements {
-    width: 1200px;
     position: absolute;
     margin: -18px 0px 0px 570px;
 }
@@ -165,14 +164,15 @@ ol {
     color:#c42727;
     font-size:26px;
     margin-right:10px;
-    margin-top:15px;
+    margin-top:-29px;
 }
 
 #content .title {
     font-family: 'Muli', sans-serif;
+    display:block;
     color:#c42727;
-    font-size:26px;
-    margin-top:10px;
+    font-size:28px;
+    padding-top:12px;
 }
 
 #content .card .body {
@@ -180,8 +180,8 @@ ol {
     float:right;
     color:#c42727;
     font-size:26px;
-    margin-right:5px;
-    margin-bottom:-3px;
+    margin-right:-10px;
+    margin-bottom:-6px;
     margin-top:5px;
     font-size: 12px;
 }
@@ -223,7 +223,7 @@ ol {
 #content {
     padding:10px 700px;
     padding-left: 70px;
-    width: 1150px;
+    width: 1130px;
 }
 
 /* forms */
@@ -484,11 +484,10 @@ img.user-detail {
 }
 .card_image {
     display: block;
-    border: none;
-    border-radius: 34px;
+    border-radius: 40px 40px 38px 38px / 48px 48px 32px 32px;
     height: 180px;
     width: 255px;
-    padding-right:7px;
+    padding-right:15px;
     padding-top:15px;
     padding-left:8px;
 }
@@ -499,7 +498,7 @@ img.user-detail {
 }
 .card_bottom {
 
-    margin-bottom: -10px;
+    margin-bottom: 20px;
     float:bottom;
 
 }
