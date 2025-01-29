@@ -57,7 +57,7 @@ ol {
 #header {
     padding:16px 100px;
     font-size:20px;
-    background:#8B0000;
+    background:#007cff;
     color:#FF00FF;
     border-bottom:2px solid #1cgh78;
     overflow:auto;
@@ -93,7 +93,7 @@ ol {
 
 #header .logout_button {
     font-weight:bold;
-    background:#8B0000;
+    background:#007cff;
     color:#fff;
     float:right;
     font-size:22px;
@@ -107,7 +107,7 @@ ol {
 
 #header .register_button {
     font-weight:bold;
-    background:#8B0000;
+    background:#007cff;
     color:#fff;
     float:right;
     font-size:22px;
@@ -121,7 +121,7 @@ ol {
 
 #header .auth_button {
     font-weight:bold;
-    background:#8B0000;
+    background:#007cff;
     color:#fff;
     float:right;
     font-size:22px;
@@ -145,7 +145,13 @@ ol {
 
 .new_announcement {
     position: absolute;
-    margin: -92px 0px 0px 520px;
+    right: -50;
+    margin: -20px 0px 0px 520px;
+}
+
+.my_announcements {
+    position: absolute;
+    margin: 48px 0px 0px 570px;
 }
 
 .make_new_announcement {
@@ -153,15 +159,10 @@ ol {
     margin: -92px 0px 0px 440px;
 }
 
-.my_announcements {
-    position: absolute;
-    margin: -18px 0px 0px 570px;
-}
-
 #content .price {
     font-family: 'Muli', sans-serif;
     float:right;
-    color:#c42727;
+    color:#1c9fff;
     font-size:26px;
     margin-right:10px;
     margin-top:-29px;
@@ -170,7 +171,7 @@ ol {
 #content .title {
     font-family: 'Muli', sans-serif;
     display:block;
-    color:#c42727;
+    color:#1c9fff;
     font-size:28px;
     padding-top:12px;
 }
@@ -178,7 +179,7 @@ ol {
 #content .card .body {
     font-family: 'Muli', sans-serif;
     float:right;
-    color:#c42727;
+    color:#1c9fff;
     font-size:26px;
     margin-right:-10px;
     margin-bottom:-6px;
@@ -262,31 +263,31 @@ input[type=submit], a.button {
 
 input[type=new], a.button {
     font-weight:bold;
-    background:#8B0000;
+    background:##007cff;
     color:#fff;
     padding:14px 70px;
     font-size:30px;
     margin: 0px 0px 0px 290px;
 }
 
-button[type=big], a.button {
+button[type=big1], b.button {
     font-weight:bold;
-    background:#8B0000;
+    background:#007cff;
     color:#fff;
     padding:12px 50px;
     font-size:30px;
-    margin: 100px 0px 0px 770px;
     cursor:pointer;
     border-radius: 32px;
+    margin: 50px 0px 0px 720px;
 }
 
-button[type=big1], a.button {
+button[type=big2], a.button {
     font-weight:bold;
-    background:#8B0000;
+    background:#007cff;
     color:#fff;
     padding:12px 50px;
     font-size:30px;
-    margin: 100px 0px 0px 720px;
+    margin: 50px 0px 0px 670px;
     cursor:pointer;
     border-radius: 32px;
     width: 452px;
@@ -294,7 +295,7 @@ button[type=big1], a.button {
 
 button[type=make_new_announcement], b.button {
     font-weight:bold;
-    background:#8B0000;
+    background:#007cff;
     color:#fff;
     padding:16px 10px;
     font-size:25px;
@@ -475,6 +476,8 @@ img.user-detail {
   position: relative;
   min-height: 210px;
   margin-top: 15px;
+  width: 1145px;
+
 }
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -506,22 +509,23 @@ img.user-detail {
 /* filters */
 
  .filters {
-            margin-bottom: 20px;
-            padding: 10px;
+            margin-bottom: -5px;
+            padding: 8px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 14px;
             background-color: #f9f9f9;
-            display: flex;  /* Делаем контейнер гибким */
-            align-items: center;  /* Выравниваем элементы по центру */
-            gap: 10px;  /* Расстояние между элементами */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 1125px;
         }
         .filters label {
-            margin-right: 5px;
+            margin-right: -5px;
         }
         .filters input, .filters select {
             padding: 5px;
             border: 1px solid #ccc;
-            border-radius: 8px;
+            border-radius: 14px;
         }
         .filters button {
             padding: 10px 20px;
@@ -535,7 +539,7 @@ img.user-detail {
             background-color: #0056b3;
         }
         .checkbox-list {
-            display: flex;  /* Чекбоксы в ряд */
+            display: flex;
             align-items: center;
             gap: 10px;
         }

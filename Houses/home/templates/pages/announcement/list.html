@@ -6,6 +6,7 @@
 
 
     <h1>Поиск недвижимости</h1>
+
         <div class="filters">
         <form method="get" style="display: flex; align-items: center; gap: 16px;">
             <div class="checkbox-list">
@@ -41,22 +42,22 @@
             <div>
                 <button type="submit">Применить</button>
             </div>
+
         </form>
     </div>
+
         {% if request.user.is_authenticated %}
         <form class="my_announcements" action="{% url 'houses:my_announcements' %}">
-            <button type="big1">Мои объявления</button>
+            <button type="big2" >Мои объявления</button>
         </form>
         <form class="new_announcement" action="{% url 'houses:create_announcement' %}">
-            <button type="big">Выложить объявление</button>
+            <button type="big1">Выложить объявление</button>
         </form>
         {% else %}
         <form class="make_new_announcement" action="{% url 'houses:login' %}">
             <button type="make_new_announcement" align="center">Авторизуйтесь, чтобы выложить объявление</button>
         </form>
         {% endif %}
-
-
     {% for property in property_list %}
     <body>
     <div class="card" style="top: 8px">

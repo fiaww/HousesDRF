@@ -45,10 +45,10 @@
     </div>
         {% if request.user.is_authenticated %}
         <form class="my_announcements" action="{% url 'houses:homepage' %}">
-            <button type="big1">Все объявления</button>
+            <button type="big2">Все объявления</button>
         </form>
         <form class="new_announcement" action="{% url 'houses:create_announcement' %}">
-            <button type="big">Выложить объявление</button>
+            <button type="big1">Выложить объявление</button>
         </form>
 
         {% else %}
