@@ -5,9 +5,13 @@
 {% block content %}
  <h1>Создание объявления</h1>
  <p>Создайте объявление, заполняя поля указанные ниже:</p>
-     <form method="post" >
+     <form method="post" enctype="multipart/form-data">
         {{ property_form.as_p }}
          {% csrf_token %}
-        <button type="submit">Submit</button>
+         <div>
+            <label for="id_images">Изображения:</label>
+            <input type="file" name="images" id="id_images" multiple>
+        </div>
+        <button type="submit">Cохранить</button>
      </form>
 {% endblock %}

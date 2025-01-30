@@ -64,12 +64,12 @@ class PropertyViewSet(viewsets.ModelViewSet):
             return redirect('houses:detail', pk=property_edit.pk)
 
         if request.method == 'POST':
-            form = PropertyForm(request.POST, instance=property_edit)
+            form = PropertyForm(request.POST, request.FILES, instance=property_edit)
             if form.is_valid():
                 form.save()
 
                 for file in request.FILES.getlist('images'):
-                    PropertyImage.objects.create(property_edit=property_edit, image=file)
+                    PropertyImage.objects.create(property=property_edit, image=file)
 
                 return redirect('houses:detail', pk=property_edit.pk)
         else:
@@ -149,14 +149,14 @@ class UserRegistrationView(generics.CreateAPIView):
 @login_required
 def create_announcement(request):
     if request.method == 'POST':
-        property_form = PropertyForm(request.POST)
+        property_form = PropertyForm(request.POST, request.FILES)
         if property_form.is_valid():
             new_property = property_form.save(commit=False)
             new_property.owner = request.user
             new_property.save()
 
             for file in request.FILES.getlist('images'):
-                PropertyImage.objects.create(new_property=new_property, image=file)
+                PropertyImage.objects.create(property=new_property, image=file)
 
             return redirect('houses:homepage')
     else:

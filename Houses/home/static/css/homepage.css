@@ -146,17 +146,17 @@ ol {
 .new_announcement {
     position: absolute;
     right: -50;
-    margin: -20px 0px 0px 520px;
+    margin: -20px 0px 0px 620px;
 }
 
 .my_announcements {
     position: absolute;
-    margin: 48px 0px 0px 570px;
+    margin: 48px 0px 0px 670px;
 }
 
 .make_new_announcement {
     position: absolute;
-    margin: -92px 0px 0px 440px;
+    margin: -92px 0px 0px 540px;
 }
 
 #content .price {
@@ -476,7 +476,7 @@ img.user-detail {
   position: relative;
   min-height: 210px;
   margin-top: 15px;
-  width: 1145px;
+  width: 1260px;
 
 }
 .card:hover {
@@ -543,3 +543,30 @@ img.user-detail {
             align-items: center;
             gap: 10px;
         }
+
+/* swiper */
+
+.swiper-container {
+    margin: 0 auto;
+
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+}
+
+.swiper-button-next {
+    color: #FFFFFF;
+    margin-right: 985px;
+}
+
+.swiper-button-prev {
+    color: #FFFFFF;
+    margin-left: 5px;
+}
+

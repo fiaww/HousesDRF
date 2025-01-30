@@ -46,41 +46,74 @@
         </form>
     </div>
 
+
         {% if request.user.is_authenticated %}
+
         <form class="my_announcements" action="{% url 'houses:my_announcements' %}">
             <button type="big2" >Мои объявления</button>
         </form>
+
         <form class="new_announcement" action="{% url 'houses:create_announcement' %}">
             <button type="big1">Выложить объявление</button>
         </form>
+
         {% else %}
+
         <form class="make_new_announcement" action="{% url 'houses:login' %}">
             <button type="make_new_announcement" align="center">Авторизуйтесь, чтобы выложить объявление</button>
         </form>
+
         {% endif %}
+
+
     {% for property in property_list %}
     <body>
-    <div class="card" style="top: 8px">
-    <h2>
-            <a href="{% url 'houses:detail' property.pk %}"></a>
-            {% for image in property.images.all %}
-            <img src="{{image.image.url}}" loading="lazy" class="card_image" align="left" alt="{{ property.title }}"/>
-            {% endfor %}
+        <div class="card" style="top: 8px">
+            <h2>
+            <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+                        {% for image in property.images.all %}
+                            <div class="swiper-container">
+
+
+                                        <img src="{{image.image.url}}" loading="lazy" class="card_image" align="left" alt="{{ property.title }}"/>
+
+
+                            </div>
+                        {% endfor %}
+
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+
+            <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const swiper = new Swiper('.swiper-container', {
+                        loop: true,
+                        navigation: {
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        },
+                    });
+                });
+            </script>
+
             <a href="{% url 'houses:detail' property.pk %}" class="title">{{ property.title }}</a>
             <a class="price">{{ property.price }} ₽</a>
-    </h2>
-        <h4>
-            <p class="body">{{ property.description|truncatewords:50|linebreaks }}</p>
-        </h4>
+            </h2>
+                <h4>
+                    <p class="body">{{ property.description|truncatewords:50|linebreaks }}</p>
+                </h4>
 
-            <h3 class="card_bottom">
-                <p >Город: {{ property.city }}</p>
-                <p >Продавец: {{ property.owner }}</p>
-                <p >Опубликовано: {{ property.created_at }}</p>
-                <br>
-            </h3>
-        </a>
-    </div>
+                <h3 class="card_bottom">
+                    <p >Город: {{ property.city }}</p>
+                    <p >Продавец: {{ property.owner }}</p>
+                    <p >Опубликовано: {{ property.created_at }}</p>
+                    <br>
+                </h3>
+            </a>
+        </div>
+
     </body>
     {% endfor %}
     <br>
