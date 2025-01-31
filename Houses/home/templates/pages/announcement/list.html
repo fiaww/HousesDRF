@@ -65,53 +65,56 @@
 
         {% endif %}
 
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
     {% for property in property_list %}
     <body>
         <div class="card" style="top: 8px">
+
             <h2>
-            <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
                         {% for image in property.images.all %}
-                            <div class="swiper-container">
-
-
-                                        <img src="{{image.image.url}}" loading="lazy" class="card_image" align="left" alt="{{ property.title }}"/>
-
-
+                            <div class="swiper-slide">
+                                <img src="{{image.image.url}}" loading="lazy" class="card_image" align="left" alt="{{ property.title }}"/>
                             </div>
                         {% endfor %}
-
+                    </div>
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
+                </div>
+                <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const swiper = new Swiper('.swiper-container', {
+                                navigation: {
+                                    nextEl: '.swiper-button-next',
+                                    prevEl: '.swiper-button-prev',
+                                },
+                            });
+                        });
+                </script>
 
-            <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    const swiper = new Swiper('.swiper-container', {
-                        loop: true,
-                        navigation: {
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
-                        },
-                    });
-                });
-            </script>
+                <div class="card-text">
+                    <a href="{% url 'houses:detail' property.pk %}" class="title">{{ property.title }}</a>
+                        {% if property.is_for_sale %}
+                            <a class="price">{{ property.price }} ₽</a>
+                        {% else %}
+                            <a class="price">{{ property.price }} ₽/мес</a>
+                        {% endif %}
 
-            <a href="{% url 'houses:detail' property.pk %}" class="title">{{ property.title }}</a>
-            <a class="price">{{ property.price }} ₽</a>
+                    <h4>
+                        <p class="body">{{ property.description|truncatewords:50|linebreaks }}</p>
+                    </h4>
+
+                    <h3 class="card_bottom">
+                        <p >Город: {{ property.city }}</p>
+                        <p >Продавец: {{ property.owner }}</p>
+                        <p >Опубликовано: {{ property.created_at }}</p>
+                        <br>
+                    </h3>
+                </div>
             </h2>
-                <h4>
-                    <p class="body">{{ property.description|truncatewords:50|linebreaks }}</p>
-                </h4>
-
-                <h3 class="card_bottom">
-                    <p >Город: {{ property.city }}</p>
-                    <p >Продавец: {{ property.owner }}</p>
-                    <p >Опубликовано: {{ property.created_at }}</p>
-                    <br>
-                </h3>
-            </a>
         </div>
 
     </body>

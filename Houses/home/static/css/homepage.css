@@ -170,7 +170,6 @@ ol {
 
 #content .title {
     font-family: 'Muli', sans-serif;
-    display:block;
     color:#1c9fff;
     font-size:28px;
     padding-top:12px;
@@ -468,25 +467,28 @@ img.user-detail {
 }
 
 .card {
-  outline: 1px solid;
-  outline-color: #D6D6D6;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  border-radius: 28px;
-  position: relative;
-  min-height: 210px;
-  margin-top: 15px;
-  width: 1260px;
-
+    align-items: flex-start;  /* Выравниваем элементы по верхнему краю */
+    outline: 1px solid;
+    outline-color: #D6D6D6;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 28px;
+    position: relative;
+    min-height: 210px;
+    margin-top: 15px;
+    width: 1260px;
 }
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 .container {
-  padding: 2px 36px;
+    display: flex;
+    padding: 2px 36px;
+}
+.card-text{
+    flex: 1;
 }
 .card_image {
-    display: block;
     border-radius: 40px 40px 38px 38px / 48px 48px 32px 32px;
     height: 180px;
     width: 255px;
@@ -497,13 +499,11 @@ img.user-detail {
 .card_title {
     padding-top:12px;
     margin-top:8px;
-    display: block;
+    display: flex;
 }
 .card_bottom {
-
     margin-bottom: 20px;
     float:bottom;
-
 }
 
 /* filters */
@@ -547,17 +547,18 @@ img.user-detail {
 /* swiper */
 
 .swiper-container {
-    margin: 0 auto;
-
-}
-
-.swiper-slide {
+    overflow: hidden;
     display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .swiper-slide img {
+    display: flex;
+    border-radius: 40px 40px 38px 38px / 48px 48px 32px 32px;
+    height: 180px;
+    width: 255px;
+    padding-right:15px;
+    padding-top:15px;
+    padding-left:8px;
 }
 
 .swiper-button-next {
@@ -569,4 +570,3 @@ img.user-detail {
     color: #FFFFFF;
     margin-left: 5px;
 }
-

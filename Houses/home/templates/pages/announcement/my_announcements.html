@@ -63,7 +63,9 @@
     <div class="card" style="top: 8px">
     <h2>
             <a href="{% url 'houses:detail' property.pk %}"></a>
-            <img src="{{property_images.url}}"  class="card_image" align="left" alt=""/>
+            {% for image in property.images.all %}
+            <img src="{{image.image.url}}" loading="lazy" class="card_image" align="left" alt="{{ property.title }}"/>
+            {% endfor %}
             <a href="{% url 'houses:detail' property.pk %}" class="title">{{ property.title }}</a>
             <a class="price">{{ property.price }} ₽</a>
     </h2>
