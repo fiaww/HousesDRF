@@ -71,7 +71,7 @@
     <body>
         <div class="card" style="top: 8px">
 
-            <h2>
+
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
                         {% for image in property.images.all %}
@@ -83,17 +83,7 @@
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                 </div>
-                <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-                <script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                        const swiper = new Swiper('.swiper-container', {
-                                navigation: {
-                                    nextEl: '.swiper-button-next',
-                                    prevEl: '.swiper-button-prev',
-                                },
-                            });
-                        });
-                </script>
+
 
                 <div class="card-text">
                     <a href="{% url 'houses:detail' property.pk %}" class="title">{{ property.title }}</a>
@@ -114,9 +104,20 @@
                         <br>
                     </h3>
                 </div>
-            </h2>
-        </div>
 
+
+        </div>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const swiper = new Swiper('.swiper-container', {
+                        navigation: {
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        },
+                    });
+                });
+        </script>
     </body>
     {% endfor %}
     <br>

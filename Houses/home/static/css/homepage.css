@@ -166,6 +166,7 @@ ol {
     font-size:26px;
     margin-right:10px;
     margin-top:-29px;
+    padding-top:36px;
 }
 
 #content .title {
@@ -467,6 +468,7 @@ img.user-detail {
 }
 
 .card {
+    display: flex;
     align-items: flex-start;  /* Выравниваем элементы по верхнему краю */
     outline: 1px solid;
     outline-color: #D6D6D6;
@@ -477,11 +479,14 @@ img.user-detail {
     min-height: 210px;
     margin-top: 15px;
     width: 1260px;
+    padding: 20px;
+
 }
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 .container {
+
     display: flex;
     padding: 2px 36px;
 }
@@ -548,7 +553,12 @@ img.user-detail {
 
 .swiper-container {
     overflow: hidden;
-    display: flex;
+    width: 300px;  /* Фиксированная ширина для изображений */
+    height: 200px;  /* Фиксированная высота для изображений */
+}
+
+.swiper-wrapper {
+
 }
 
 .swiper-slide img {
@@ -559,14 +569,15 @@ img.user-detail {
     padding-right:15px;
     padding-top:15px;
     padding-left:8px;
+
 }
 
 .swiper-button-next {
     color: #FFFFFF;
-    margin-right: 985px;
+    margin-right: 1012px;
 }
 
 .swiper-button-prev {
     color: #FFFFFF;
-    margin-left: 5px;
+    margin-left: 22px;
 }
