@@ -155,9 +155,11 @@ def create_announcement(request):
             new_property.owner = request.user
             new_property.save()
 
+        if not request.FILES.getlist('images'):
+            property_form.add_error(None, "Необходимо загрузить как минимум одно изображение.")
+        else:
             for file in request.FILES.getlist('images'):
                 PropertyImage.objects.create(property=new_property, image=file)
-
             return redirect('houses:homepage')
     else:
         property_form = PropertyForm()

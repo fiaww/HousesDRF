@@ -46,7 +46,7 @@ class Property(models.Model):
     title = models.CharField(max_length=60)
     description = models.TextField(blank=True)
     property_type = models.CharField(max_length=50, choices=PROPERTY_TYPES)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=12, decimal_places=2)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     location = models.CharField(max_length=255)
     rooms = models.ForeignKey(Rooms, on_delete=models.CASCADE)

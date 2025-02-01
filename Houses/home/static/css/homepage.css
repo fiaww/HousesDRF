@@ -573,11 +573,30 @@ img.user-detail {
 }
 
 .swiper-button-next {
-    color: #FFFFFF;
     margin-right: 1012px;
 }
 
 .swiper-button-prev {
-    color: #FFFFFF;
     margin-left: 22px;
+}
+
+.swiper-pagination {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-10%);
+    z-index: 10;
+}
+
+.swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    background-color: #ccc;
+    opacity: 1;
+    margin: 0 5px;
+    transition: background-color 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #007bff;
 }

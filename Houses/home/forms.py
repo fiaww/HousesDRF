@@ -1,4 +1,6 @@
 from django import forms
+from django.core.exceptions import ValidationError
+
 from .models import Property, PropertyImage
 
 
@@ -12,6 +14,12 @@ class PropertyImageForm(forms.ModelForm):
     class Meta:
         model = PropertyImage
         fields = ['image']
+
+    def clean_image(self):
+        image = self.cleaned_data.get('image')
+        if not image:
+            raise ValidationError("Изображение обязательно для загрузки.")
+        return image
 
 
 class PropertyFilterForm(forms.Form):

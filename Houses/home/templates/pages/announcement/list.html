@@ -71,40 +71,39 @@
     <body>
         <div class="card" style="top: 8px">
 
-
-                <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                        {% for image in property.images.all %}
-                            <div class="swiper-slide">
-                                <img src="{{image.image.url}}" loading="lazy" class="card_image" align="left" alt="{{ property.title }}"/>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    {% for image in property.images.all %}
+                        <div class="swiper-slide">
+                            <img src="{{image.image.url}}" loading="lazy" class="card_image" align="left" alt="{{ property.title }}"/>
+                        </div>
+                    {% endfor %}
                 </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
 
 
-                <div class="card-text">
-                    <a href="{% url 'houses:detail' property.pk %}" class="title">{{ property.title }}</a>
-                        {% if property.is_for_sale %}
-                            <a class="price">{{ property.price }} ₽</a>
-                        {% else %}
-                            <a class="price">{{ property.price }} ₽/мес</a>
-                        {% endif %}
+            <div class="card-text">
+                <a href="{% url 'houses:detail' property.pk %}" class="title">{{ property.title }}</a>
+                {% if property.is_for_sale %}
+                    <a class="price">{{ property.price|floatformat:0 }} ₽</a>
+                {% else %}
+                    <a class="price">{{ property.price|floatformat:0 }} ₽/мес</a>
+                {% endif %}
 
-                    <h4>
-                        <p class="body">{{ property.description|truncatewords:50|linebreaks }}</p>
-                    </h4>
+                <h4>
+                    <p class="body">{{ property.description|truncatewords:50|linebreaks }}</p>
+                </h4>
 
-                    <h3 class="card_bottom">
-                        <p >Город: {{ property.city }}</p>
-                        <p >Продавец: {{ property.owner }}</p>
-                        <p >Опубликовано: {{ property.created_at }}</p>
-                        <br>
-                    </h3>
-                </div>
-
+                <h3 class="card_bottom">
+                    <p >Город: {{ property.city }}</p>
+                    <p >Продавец: {{ property.owner }}</p>
+                    <p >Опубликовано: {{ property.created_at }}</p>
+                    <br>
+                </h3>
+            </div>
 
         </div>
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -114,6 +113,10 @@
                         navigation: {
                             nextEl: '.swiper-button-next',
                             prevEl: '.swiper-button-prev',
+                        },
+                        pagination: {
+                            el: '.swiper-pagination',
+                            clickable: true,
                         },
                     });
                 });

@@ -10,7 +10,10 @@
          {% csrf_token %}
          <div>
             <label for="id_images">Изображения:</label>
-            <input type="file" name="images" id="id_images" multiple>
+            <input type="file" name="images" id="id_images" multiple required>
+            {% if form.errors %}
+                <p style="color: red;">{{ form.errors }}</p>
+            {% endif %}
         </div>
         <button type="submit">Cохранить</button>
      </form>
