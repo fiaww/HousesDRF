@@ -51,7 +51,7 @@ class Property(models.Model):
     location = models.CharField(max_length=255)
     rooms = models.ForeignKey(Rooms, on_delete=models.CASCADE)
     is_for_sale = models.BooleanField(default=False)
-    is_for_rent = models.BooleanField(default=True)
+    is_for_rent = models.BooleanField(default=False)
     owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='properties')
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)

@@ -12,12 +12,30 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
+
+        {% if images %}
+            <div class="image-preview">
+                {% for image in images %}
+                <div>
+                    <img src="{{image.image.url}}" alt="Изображение {{ forloop.counter }}"/>
+                    <label>
+                        <input type="checkbox" name="delete_images" value="{{ image.id }}"> Удалить
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         <div>
             <label for="id_images">Изображения:</label>
             <input type="file" name="images" id="id_images" multiple>
         </div>
-        <button type="submit">Сохранить изменения</button>
+
+        <div>
+            <button type="submit">Сохранить изменения</button>
+            <a href="{% url 'houses:detail' property_edit.pk %}">Отмена</a>
+        </div>
     </form>
-    <a href="{% url 'houses:detail' property_edit.pk %}">Отмена</a>
+
 </body>
 {% endblock %}

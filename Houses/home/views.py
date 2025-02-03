@@ -13,6 +13,9 @@ from .serializer import UserSerializer
 from .forms import PropertyForm, PropertyFilterForm
 
 
+MAX_IMAGES = 20
+
+
 class PropertyViewSet(viewsets.ModelViewSet):
     queryset = Property.objects.all()
     serializer_class = PropertySerializer
@@ -68,14 +71,28 @@ class PropertyViewSet(viewsets.ModelViewSet):
             if form.is_valid():
                 form.save()
 
-                for file in request.FILES.getlist('images'):
-                    PropertyImage.objects.create(property=property_edit, image=file)
+                if 'delete_images' in request.POST:
+                    deleted_ids = request.POST.getlist('delete_images')
+                    PropertyImage.objects.filter(id__in=deleted_ids).delete()
 
-                return redirect('houses:detail', pk=property_edit.pk)
+                images = request.FILES.getlist('images')
+                current_images_count = property_edit.images.count()
+                if current_images_count + len(images) > MAX_IMAGES:
+                    form.add_error(None,
+                                   f"Максимальное количество изображений: {MAX_IMAGES}. У вас уже {current_images_count}.")
+                else:
+                    for file in request.FILES.getlist('images'):
+                        PropertyImage.objects.create(property=property_edit, image=file)
+                    return redirect('houses:detail', pk=property_edit.pk)
         else:
             form = PropertyForm(instance=property_edit)
 
-        return render(request, 'pages/announcement/edit.html', {'form': form, 'property_edit': property_edit})
+        images = property_edit.images.all()
+
+        return render(request, 'pages/announcement/edit.html', {'form': form,
+                                                                'property_edit': property_edit,
+                                                                'images': images,
+                                                                'max_images': MAX_IMAGES})
 
     @login_required
     def property_delete(request, pk):
@@ -150,6 +167,7 @@ class UserRegistrationView(generics.CreateAPIView):
 def create_announcement(request):
     if request.method == 'POST':
         property_form = PropertyForm(request.POST, request.FILES)
+        images = request.FILES.getlist('images')
         if property_form.is_valid():
             new_property = property_form.save(commit=False)
             new_property.owner = request.user
@@ -157,6 +175,8 @@ def create_announcement(request):
 
         if not request.FILES.getlist('images'):
             property_form.add_error(None, "Необходимо загрузить как минимум одно изображение.")
+        if len(images) > MAX_IMAGES:
+            property_form.add_error(None, f"Максимальное количество изображений: {MAX_IMAGES}.")
         else:
             for file in request.FILES.getlist('images'):
                 PropertyImage.objects.create(property=new_property, image=file)

@@ -600,3 +600,22 @@ img.user-detail {
 .swiper-pagination-bullet-active {
     background-color: #007bff;
 }
+
+/* image preview */
+
+        .image-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .image-preview img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .image-preview label {
+            display: block;
+            text-align: center;
+        }

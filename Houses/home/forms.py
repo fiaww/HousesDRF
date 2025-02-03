@@ -5,9 +5,33 @@ from .models import Property, PropertyImage
 
 
 class PropertyForm(forms.ModelForm):
+    LISTING_TYPE_CHOICES = [
+        ('sale', 'Продажа'),
+        ('rent', 'Аренда'),
+    ]
+
+    listing_type = forms.ChoiceField(
+        choices=LISTING_TYPE_CHOICES,
+        widget=forms.RadioSelect,
+        label="Тип объявления",
+    )
+
     class Meta:
         model = Property
-        fields = ['title', 'description', 'price', 'city', 'rooms', 'property_type', 'location', 'is_for_sale', 'is_for_rent']
+        fields = ['title', 'description', 'price', 'city', 'rooms', 'property_type', 'location']
+
+    def save(self, commit=True):
+        property = super().save(commit=False)
+        listing_type = self.cleaned_data.get('listing_type')
+        if listing_type == 'sale':
+            property.is_for_sale = True
+            property.is_for_rent = False
+        if listing_type == 'rent':
+            property.is_for_sale = False
+            property.is_for_rent = True
+        if commit:
+            property.save()
+        return property
 
 
 class PropertyImageForm(forms.ModelForm):

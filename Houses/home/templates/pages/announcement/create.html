@@ -3,18 +3,50 @@
 {% block title %}Создание объявления{% endblock %}
 
 {% block content %}
- <h1>Создание объявления</h1>
- <p>Создайте объявление, заполняя поля указанные ниже:</p>
-     <form method="post" enctype="multipart/form-data">
-        {{ property_form.as_p }}
-         {% csrf_token %}
-         <div>
-            <label for="id_images">Изображения:</label>
-            <input type="file" name="images" id="id_images" multiple required>
-            {% if form.errors %}
-                <p style="color: red;">{{ form.errors }}</p>
-            {% endif %}
-        </div>
-        <button type="submit">Cохранить</button>
-     </form>
+    <h1>Создание объявления</h1>
+    <p>Создайте объявление, заполняя поля указанные ниже:</p>
+        <form method="post" enctype="multipart/form-data">
+            {{ property_form.as_p }}
+            {% csrf_token %}
+            <div>
+                <label for="id_images">Изображения:</label>
+                <input type="file" name="images" id="id_images" multiple required>
+                {% if form.errors %}
+                    <p style="color: red;">{{ form.errors }}</p>
+                {% endif %}
+            </div>
+            <button type="submit">Cохранить</button>
+        </form>
+
+    <script>
+        const MAX_IMAGES = {{ max_images }};  // Максимальное количество изображений
+        const fileInput = document.getElementById('id_images');
+        const imageCountMessage = document.getElementById('image-count-message');
+        const form = document.getElementById('property-form');
+
+        fileInput.addEventListener('change', function() {
+            const currentImagesCount = {{ images|length }};  // Количество уже прикреплённых изображений
+            const newImagesCount = fileInput.files.length;
+            const totalImagesCount = currentImagesCount + newImagesCount;
+
+            if (totalImagesCount > MAX_IMAGES) {
+                imageCountMessage.textContent = `Максимальное количество изображений: ${MAX_IMAGES}. У вас уже ${currentImagesCount}.`;
+                fileInput.value = '';  // Очищаем поле ввода
+            } else {
+                imageCountMessage.textContent = `Вы выбрали ${newImagesCount} изображений. Всего будет ${totalImagesCount}.`;
+            }
+        });
+
+        form.addEventListener('submit', function(event) {
+            const currentImagesCount = {{ images|length }};
+            const newImagesCount = fileInput.files.length;
+            const totalImagesCount = currentImagesCount + newImagesCount;
+
+            if (totalImagesCount > MAX_IMAGES) {
+                alert(`Максимальное количество изображений: ${MAX_IMAGES}. У вас уже ${currentImagesCount}.`);
+                event.preventDefault();  // Останавливаем отправку формы
+            }
+        });
+    </script>
+
 {% endblock %}

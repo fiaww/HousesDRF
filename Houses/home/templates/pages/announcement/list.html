@@ -1,5 +1,6 @@
 {% extends "pages/base.html" %}
 
+
 {% block title %}Houses{% endblock %}
 
 {% block content %}
@@ -87,11 +88,11 @@
 
             <div class="card-text">
                 <a href="{% url 'houses:detail' property.pk %}" class="title">{{ property.title }}</a>
-                {% if property.is_for_sale %}
-                    <a class="price">{{ property.price|floatformat:0 }} ₽</a>
-                {% else %}
-                    <a class="price">{{ property.price|floatformat:0 }} ₽/мес</a>
-                {% endif %}
+                    {% if property.is_for_sale %}
+                        <a class="price" data-price="{{ property.price|floatformat:0 }}">{{ property.price|floatformat:0 }} ₽</a>
+                    {% else %}
+                        <a class="price" data-price="{{ property.price|floatformat:0 }}">{{ property.price|floatformat:0 }} ₽/мес</a>
+                    {% endif %}
 
                 <h4>
                     <p class="body">{{ property.description|truncatewords:50|linebreaks }}</p>
@@ -107,20 +108,27 @@
 
         </div>
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const swiper = new Swiper('.swiper-container', {
-                        navigation: {
-                            nextEl: '.swiper-button-next',
-                            prevEl: '.swiper-button-prev',
-                        },
-                        pagination: {
-                            el: '.swiper-pagination',
-                            clickable: true,
-                        },
-                    });
-                });
-        </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const swiper = new Swiper('.swiper-container', {
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+            });
+
+            const priceElements = document.querySelectorAll('.price');
+            priceElements.forEach(element => {
+                const price = element.getAttribute('data-price');
+                const formattedPrice = new Intl.NumberFormat('ru-RU').format(price);
+                element.textContent = formattedPrice + (element.textContent.includes('/мес') ? ' ₽/мес' : ' ₽');
+            });
+        });
+    </script>
     </body>
     {% endfor %}
     <br>
